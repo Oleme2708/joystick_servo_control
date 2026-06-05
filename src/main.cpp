@@ -23,7 +23,7 @@ void setup()
   servo1.attach(servo1pin);
   servo2.attach(servo2pin);
   servo1.write(65);
-  servo1.write(65);
+  servo2.write(65);
 }
 
 void loop()
@@ -46,9 +46,9 @@ void loop()
   {
     servo1.write(170);
   }
-  else if (digitalRead(joystick1_buttonPin) == HIGH)
+  else if (digitalRead(joystick1_buttonPin) == LOW)
   {
-    servo1.write(0);
+    servo1.write(65);
   }
   // joystick2 and servo2 setup
   joystick2.loop();
@@ -68,8 +68,8 @@ void loop()
   {
     servo2.write(170);
   }
-  else if (digitalRead(joystick2_buttonPin) == HIGH)
+  else if (digitalRead(joystick2_buttonPin) == LOW)
   {
-    servo2.write(0);
+    servo2.write(65);
   }
 }
