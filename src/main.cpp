@@ -1,75 +1,36 @@
 // library
 #include <Arduino.h>
 #include <Servo.h>
-#include <EasyJoystick.h>
 // servo setup
 Servo servo1;
 Servo servo2;
 int servo1pin = 5;
 int servo2pin = 6;
-// joystick setup
-EasyJoystick joystick1;
-EasyJoystick joystick2;
+// joystick1 setup
+const int joystick1_Xpin = A0;
+const int joystick1_Ypin = A1;
 const int joystick1_buttonPin = 3;
-const int joystick2_buttonPin = 4;
+// time
+unsigned long StartTime = 0;
 
 void setup()
 {
-  joystick1.begin(A0, A1, true, true); // joystick.begin(xPin, yPin, flipX, flipY)
-  joystick2.begin(A2, A3, true, true);
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(joystick1_buttonPin, INPUT_PULLUP);
-  pinMode(joystick2_buttonPin, INPUT_PULLUP);
   servo1.attach(servo1pin);
   servo2.attach(servo2pin);
-  servo1.write(65);
-  servo2.write(65);
 }
 
 void loop()
 {
-  // joystick1 and servo1 control
-  joystick1.loop();
-  if (joystick1.isUp())
+  int joyX = analogRead(joystick1_Xpin);
+  int joyY = analogRead(joystick1_Ypin);
+  if (millis() - StartTime >= 15)
   {
-    servo1.write(115);
-  }
-  else if (joystick1.isDown())
-  {
-    servo1.write(65);
-  }
-  else if (joystick1.isLeft())
-  {
-    servo1.write(50);
-  }
-  else if (joystick1.isRight())
-  {
-    servo1.write(170);
-  }
-  else if (digitalRead(joystick1_buttonPin) == LOW)
-  {
-    servo1.write(65);
-  }
-  // joystick2 and servo2 setup
-  joystick2.loop();
-  if (joystick2.isUp())
-  {
-    servo2.write(115);
-  }
-  else if (joystick2.isDown())
-  {
-    servo2.write(65);
-  }
-  else if (joystick2.isLeft())
-  {
-    servo2.write(50);
-  }
-  else if (joystick2.isRight())
-  {
-    servo2.write(170);
-  }
-  else if (digitalRead(joystick2_buttonPin) == LOW)
-  {
-    servo2.write(65);
+    int servo1_X_angle = map(joyX, 0, 1023, 0, 180);
+    servo1.write(servo1_X_angle);
+    Serial.println(servo1_X_angle);
+    int servo2_Y_angle = map(joyY, 0, 1023, 0, 180);
+    servo2.write(servo2_Y_angle);
   }
 }
