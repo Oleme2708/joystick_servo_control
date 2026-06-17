@@ -42,10 +42,10 @@ void loop()
     int joy2X = analogRead(joystick2_Xpin);
     int joy2Y = analogRead(joystick2_Ypin);
     // mapping joystick value to servo angle
-    int servo1_angle = map(joy1X, 0, 1023, 0, 180);
-    int servo2_angle = map(joy1Y, 0, 1023, 0, 180);
-    int servo3_angle = map(joy2X, 0, 1023, 0, 180);
-    int servo4_angle = map(joy2Y, 0, 1023, 0, 180);
+    int servo1_angle = map(joy1X, 0, 1024, 0, 180);
+    int servo2_angle = map(joy1Y, 0, 1024, 0, 180);
+    int servo3_angle = map(joy2X, 0, 1024, 0, 180);
+    int servo4_angle = map(joy2Y, 0, 1024, 0, 180);
     // control servo
     servo1.write(servo1_angle);
     servo2.write(servo2_angle);

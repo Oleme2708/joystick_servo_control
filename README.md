@@ -4,10 +4,9 @@ A PlatformIO project for joystick servo controller
 
 # Hardware
 - arduino uno
-- 2 servo motors (MG995)
-- analog joystick
-- 9V battery
-- capacitor
+- 4 servo motors (MG995)
+- 2 analog joysticks
+- 5V supplies (This project used breadboard power supplies module)
 
 ## Software
 - VS Code
